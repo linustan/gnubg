@@ -6,6 +6,14 @@
 > and architectural patterns. For targeted lookups, use grep/glob directly against
 > the specific files listed here.
 
+## Optimization Work
+
+Active optimization effort targeting rollout performance. Key documents:
+
+- **[FINDINGS.md](FINDINGS.md)** - Cost model, configuration profiles, open questions
+- **[PROGRESS.md](PROGRESS.md)** - Task tracking and next steps
+- **[optimization-docs/](optimization-docs/)** - Detailed analysis documents
+
 ## Build System
 
 - **Tool**: GNU Autotools (autoconf/automake)
