@@ -26,17 +26,22 @@
 - Profile C (truncation on): shorter games, truncation accuracy matters
 - Extracted all default settings with source file references
 
-### 4. Formulate user question
-- Asked user which settings they've changed from defaults
-- Their answer determines which profile to optimize for
+### 4. Establish baseline configuration
+- Received user's target configuration: "Rollout E" (medium rollout)
+- 360 trials, truncate at 7-ply, SE stop at 0.0100 (min 180 trials)
+- 1-ply chequer play (early and late), cubeful, VR on, quasi-random dice
+- Late evals ON: cube drops from 2-ply to 1-ply after first 2 plays
+- Truncation evaluation: 2-ply chequer and cube
+- Classified as Profile B + C hybrid (move scoring + truncation)
+- Documented in [optimization-docs/baseline-config.md](optimization-docs/baseline-config.md)
 
-## Blocked / Waiting
+## Next Steps
 
-- **User response needed**: Which rollout settings have they modified?
-  (chequer ply, cube ply, VR, truncation, trials)
-
-## Next Steps (pending user input)
-
-- Profile the actual hot path based on user's configuration
-- Identify specific optimization targets (NN forward pass, VR loop, cache, etc.)
+- Profile the actual hot path for the Rollout E configuration
+- Benchmark current performance as a quantitative baseline
+- Identify specific optimization targets:
+  - NN forward pass (highest-volume leaf operation)
+  - Move scoring pipeline (1-ply recursive eval per candidate)
+  - Variance reduction loop (36 x 1-ply eval per turn)
+  - Cache hit rates (more sub-evaluations = more cache value)
 - Prototype and benchmark improvements

@@ -86,13 +86,29 @@ true expectation over many trials.
 | Cubeful | ON | `gnubg.c:311` |
 | Late evals | OFF | `gnubg.c:323` |
 
+## Baseline Configuration: Rollout E (Medium Rollout)
+
+The user's target configuration for optimization. Full details in
+[optimization-docs/baseline-config.md](optimization-docs/baseline-config.md).
+
+Key settings: **360 trials, truncate at 7-ply, 1-ply chequer play, VR on,
+quasi-random dice, late evals after 2 plays (cube drops to 1-ply)**.
+
+This is a **Profile B + C hybrid**: 1-ply chequer play makes move scoring
+dominant (~36x more per move than 0-ply default), while 7-ply truncation
+keeps games short (~7 turns vs 50+). Primary optimization targets:
+
+1. NN forward pass (highest volume leaf operation)
+2. Move scoring pipeline (1-ply recursive eval per candidate)
+3. Variance reduction loop (36 x 1-ply eval per turn)
+4. Cache hit rates (more sub-evaluations = more cache value)
+
 ## Open Questions
 
-- **Awaiting user input**: Which settings have they changed from defaults?
-  This determines whether optimization should target the VR loop (Profile A)
-  or the move scoring tree (Profile B).
+(None currently — baseline configuration established.)
 
 ## Detailed Analysis
 
 See [optimization-docs/](optimization-docs/) for detailed breakdowns:
 - [rollout-cost-model.md](optimization-docs/rollout-cost-model.md) - Full cost model derivation
+- [baseline-config.md](optimization-docs/baseline-config.md) - Baseline configuration and cost analysis
